@@ -41,6 +41,12 @@ export class PedidoRepository implements IPedidoRepository {
     return null
   }
 
+  async findOne (idPedido: string): Promise<Pedido | null> {
+    const pedido = await this._pedidoModel.findOne({ idPedido }).exec()
+    if (pedido === null) { return null }
+    return this.mapperPedido(pedido)
+  }
+
   private mapper (pedidos: Pedido[]): Pedido[] {
     return pedidos.map(pedido => this.mapperPedido(pedido))
   }

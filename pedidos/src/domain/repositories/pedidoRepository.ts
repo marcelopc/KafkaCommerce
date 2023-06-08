@@ -9,4 +9,6 @@ export interface PedidoRepository {
   criar: (payload: PedidoPayload) => Promise<Pedido>
   findAll: () => Promise<Pedido[]>
   updateStatusPedido: (id: string, status: string) => Promise<Pedido | null>
+  findOne: (id: string) => Promise<Pedido | null>
+
 }

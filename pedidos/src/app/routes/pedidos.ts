@@ -8,7 +8,7 @@ routes.get('/pedidos', pedidosController.listarPedidos)
 
 routes.post('/pedidos', pedidosController.criarPedido)
 
-routes.get('/pedidos/:idpedido', (request, response) => { response.send({ message: 'Hello World' }) })
+routes.get('/pedidos/:idpedido', pedidosController.buscarPedido)
 
 routes.put('/pedidos/:idpedido', pedidosController.updateStatusPedido)
 

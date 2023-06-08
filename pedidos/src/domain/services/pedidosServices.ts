@@ -31,4 +31,9 @@ export class PedidoService {
     const pedido = await this._pedidoRepository.updateStatusPedido(id, status)
     return pedido
   }
+
+  public async buscarPedido (id: string): Promise<Pedido | null> {
+    const pedido = await this._pedidoRepository.findOne(id)
+    return pedido
+  }
 }
