@@ -23,7 +23,6 @@
     },
     "rootDirs": [
       "./src",
-    "./server.ts",
     ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
@@ -31,12 +30,10 @@
   "include": [
     "./src/**/*.ts",
     "./test/**/*.ts",
-    "./server.ts",
     ],
   "exclude": [
     "./node_modules/*",
     "dist",
-    "./server.ts",
   ],
   "files":[
     "./server.ts",

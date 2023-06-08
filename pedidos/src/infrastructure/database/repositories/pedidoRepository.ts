@@ -25,12 +25,20 @@ export class PedidoRepository implements IPedidoRepository {
     }
 
     const pedidoCriado = await this._pedidoModel.create(payload)
-    return pedidoCriado
+    return this.mapperPedido(pedidoCriado)
   }
 
   async findAll (): Promise<Pedido[]> {
     const pedidos: Pedido[] = await this._pedidoModel.find().exec()
-    return pedidos
+    return this.mapper(pedidos)
+  }
+
+  async updateStatusPedido (idPedido: string, status: string): Promise<Pedido | null> {
+    const pedido = await this._pedidoModel.findOneAndUpdate({ idPedido }, { status }, { new: true }).exec()
+    if (pedido !== null) {
+      return this.mapperPedido(pedido)
+    }
+    return null
   }
 
   private mapper (pedidos: Pedido[]): Pedido[] {

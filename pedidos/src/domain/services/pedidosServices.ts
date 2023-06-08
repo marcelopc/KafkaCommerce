@@ -20,4 +20,15 @@ export class PedidoService {
 
     return pedidoCriado
   }
+
+  public async listarPedidos (): Promise<Pedido[]> {
+    const pedidos = await this._pedidoRepository.findAll()
+
+    return pedidos
+  }
+
+  public async updateStatusPedido (id: string, status: string): Promise<Pedido | null> {
+    const pedido = await this._pedidoRepository.updateStatusPedido(id, status)
+    return pedido
+  }
 }
