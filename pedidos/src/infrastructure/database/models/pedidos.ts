@@ -14,7 +14,7 @@ const pedidoSchema = new mongoose.Schema<Pedido>({
   total: { type: Number, required: true },
   status: {
     type: String,
-    enum: ['pendente', 'em andamento', 'concluído', 'cancelado'],
+    enum: ['pendente', 'em andamento', 'concluído', 'cancelado', 'excluido'],
     default: 'pendente',
     required: true
   },

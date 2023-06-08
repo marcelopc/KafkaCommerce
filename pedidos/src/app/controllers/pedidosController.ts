@@ -68,6 +68,21 @@ export class PedidosController {
       return response.status(500).json({ error: 'Erro interno no servidor' })
     }
   }
+
+  async excluirPedido (request: Request, response: Response, next: NextFunction): Promise<Response> {
+    try {
+      const pedidoRepository = new PedidoRepository()
+      const pedidoService = new PedidoService(pedidoRepository)
+      const pedido = await pedidoService.updateStatusPedido(request.params.idpedido, 'excluido')
+
+      return response.status(201).json({ pedido })
+    } catch (error) {
+      if (error instanceof Error) {
+        return response.status(404).json({ error: error.message })
+      }
+      return response.status(500).json({ error: 'Erro interno no servidor' })
+    }
+  }
 }
 
 export default PedidosController

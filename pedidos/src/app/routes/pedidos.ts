@@ -12,6 +12,6 @@ routes.get('/pedidos/:idpedido', (request, response) => { response.send({ messag
 
 routes.put('/pedidos/:idpedido', pedidosController.updateStatusPedido)
 
-routes.delete('/pedidos/:idpedido', (request, response) => { response.send({ message: 'Hello World' }) })
+routes.delete('/pedidos/:idpedido', pedidosController.excluirPedido)
 
 export default routes
