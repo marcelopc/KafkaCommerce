@@ -1,6 +1,18 @@
-# Nome do Projeto
+# KafkaCommerce
 
-Descrição curta do projeto.
+Este projeto tem como objetivo implementar um sistema de gerenciamento de pedidos utilizando a arquitetura de microserviços e a plataforma Apache Kafka.
+O Projeto de Gerenciamento de Pedidos é uma aplicação desenvolvida em Node.js, utilizando as tecnologias TypeScript, Express e MongoDB. A arquitetura do projeto segue os princípios da Arquitetura Hexagonal (Hexagonal Architecture), que promove a separação de preocupações e a modularidade do sistema.
+
+A aplicação consiste em dois microserviços principais: "Pedidos" e "Pagamentos". O microserviço "Pedidos" é responsável pelo gerenciamento dos pedidos dos clientes, enquanto o microserviço "Pagamentos" cuida do processamento dos pagamentos relacionados a esses pedidos.
+
+A comunicação entre os microserviços é feita por meio do Apache Kafka, uma plataforma de streaming distribuída que permite o envio e recebimento de mensagens entre os diferentes componentes da aplicação. O Kafka garante a escalabilidade, tolerância a falhas e a integração assíncrona entre os serviços.
+
+O fluxo de funcionamento da aplicação é o seguinte:
+
+1. O cliente realiza um pedido por meio do microserviço "Pedidos", informando os itens desejados e o valor total.
+2. O microserviço "Pedidos" cria o pedido no banco de dados e aguarda o pagamento ser concluído.
+3. Após o pagamento ser concluído no microserviço "Pagamentos", é gerada uma mensagem no Kafka informando a conclusão do pagamento.
+4. O microserviço "Pedidos", por meio do consumer, recebe a mensagem do Kafka e atualiza o status do pedido para "em andamento".
 
 ## Configuração
 
@@ -106,3 +118,7 @@ As contribuições são bem-vindas! Se você encontrar algum problema ou tiver s
 ## Licença
 
 Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
+
+
+
+
