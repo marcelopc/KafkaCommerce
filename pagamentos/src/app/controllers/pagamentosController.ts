@@ -2,6 +2,7 @@ import { type NextFunction, type Request, type Response } from 'express'
 import { type Pagamentos, type DetalhesPagamento } from '@src/app/dtos/pagamentos'
 import { PagamentosService } from '@src/domain/services/pagamentosServices'
 import { PagamentosRepository } from '@src/infrastructure/database/repositories/pagamentosRepository'
+import PagamentoProducer from '@src/infrastructure/kafka/producers/pagamentoProducer'
 
 export class PagamentosController {
   async criarPagamentos (request: Request, response: Response, next: NextFunction): Promise<Response> {
@@ -77,6 +78,12 @@ export class PagamentosController {
       const pagamentosRepository = new PagamentosRepository()
       const pagamentosService = new PagamentosService(pagamentosRepository)
       const pedido = await pagamentosService.updateStatusPagamento(request.params.idpagamento, body.status)
+
+      const pagamentoProducer = new PagamentoProducer()
+
+      if (pedido != null) {
+        await pagamentoProducer.enviarPagamento(pedido)
+      }
 
       return response.status(201).json({ pedido })
     } catch (error) {
